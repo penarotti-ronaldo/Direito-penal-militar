@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simulado – Direito Penal Militar (com feedback explicativo)</title>
+    <title>Simulado – Direito Penal Militar (20 questões objetivas)</title>
     <style>
         * {
             box-sizing: border-box;
@@ -44,53 +44,14 @@
             padding-bottom: 15px;
         }
 
-        .tab-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 10px 28px;
-            border: none;
-            background: #e9ecef;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 15px;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #2c3e50;
-        }
-
-        .tab-btn.active {
-            background: #1e3c72;
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(30, 60, 114, 0.3);
-        }
-
-        .tab-btn:hover:not(.active) {
-            background: #d0d7e0;
-        }
-
-        .question-section {
-            display: none;
-            animation: fadeIn 0.25s ease;
-        }
-
-        .question-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0.4;
-                transform: translateY(6px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .section-title {
+            font-size: 20px;
+            margin: 30px 0 16px 0;
+            padding: 8px 16px;
+            background: #eef2f7;
+            border-radius: 8px;
+            border-left: 5px solid #1e3c72;
+            color: #1e3c72;
         }
 
         .question-card {
@@ -109,25 +70,37 @@
         .question-text {
             font-weight: 600;
             font-size: 16px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             line-height: 1.5;
+        }
+
+        .question-number {
+            color: #1e3c72;
+            margin-right: 6px;
         }
 
         .options {
             display: flex;
-            flex-wrap: wrap;
-            gap: 18px 30px;
+            flex-direction: column;
+            gap: 8px;
             padding-left: 8px;
-            align-items: center;
+            margin-bottom: 8px;
         }
 
         .options label {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 10px;
             font-weight: 500;
             cursor: pointer;
             font-size: 15px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+
+        .options label:hover {
+            background: #f0f4fa;
         }
 
         .options input[type="radio"] {
@@ -135,10 +108,7 @@
             height: 17px;
             accent-color: #1e3c72;
             cursor: pointer;
-        }
-
-        .true-false .options label {
-            min-width: 80px;
+            flex-shrink: 0;
         }
 
         .question-feedback {
@@ -190,8 +160,9 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
-            margin-left: 12px;
+            margin-top: 4px;
             white-space: nowrap;
+            align-self: flex-start;
         }
 
         .btn-check-individual:hover {
@@ -274,25 +245,11 @@
             color: #1e3c72;
         }
 
-        @media (max-width: 700px) {
-            .container {
-                padding: 18px;
-            }
-            .options {
-                gap: 10px;
-            }
-            .tab-btn {
-                padding: 8px 18px;
-                font-size: 13px;
-            }
-            .btn-check-individual {
-                margin-left: 0;
-                margin-top: 8px;
-                display: inline-block;
-            }
-            .flex-row {
-                flex-wrap: wrap;
-            }
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
         }
 
         .badge {
@@ -304,40 +261,36 @@
             margin-left: 8px;
         }
 
-        .flex-row {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 6px;
+        @media (max-width: 700px) {
+            .container {
+                padding: 18px;
+            }
+            .options label {
+                font-size: 14px;
+            }
+            .btn-check-individual {
+                margin-top: 6px;
+            }
+            .flex-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-title {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚖️ Simulado – Direito Penal Militar</h1>
-        <div class="subtitle">Foco nas aulas: CPM (Arts. 149–182, 187–194), Lei 13.491/2017, Lei 14.688/2023, IPM, CPPM e jurisprudência. <br> <strong>Clique em "Verificar" para ver a explicação da resposta.</strong></div>
-
-        <!-- Abas -->
-        <div class="tab-bar">
-            <button class="tab-btn active" data-tab="vf">Verdadeiro / Falso <span class="badge">30</span></button>
-            <button class="tab-btn" data-tab="obj">Objetivas <span class="badge">20</span></button>
+        <h1>⚖️ Simulado – Direito Penal e Processual Penal Militar</h1>
+        <div class="subtitle">
+            <strong>20 questões objetivas inéditas</strong> – extraídas de dois simulados temáticos:<br>
+            • Direito Penal e Processual Penal Militar (Guia Prático) • Inquérito Policial Militar (IPM / CPPM)
         </div>
 
-        <!-- Seção V/F -->
-        <div id="section-vf" class="question-section active">
-            <div id="vf-questions"></div>
-            <div class="action-bar">
-                <div>
-                    <button class="btn btn-success" id="check-vf">Corrigir todas</button>
-                    <button class="btn btn-danger" id="reset-vf" style="margin-left:10px;">Limpar tudo</button>
-                </div>
-                <span class="stats" id="stats-vf">0 / 30 respondidas</span>
-            </div>
-            <div id="result-vf" class="result-box" style="display:none;"></div>
-        </div>
-
-        <!-- Seção Objetivas -->
-        <div id="section-obj" class="question-section">
+        <!-- Seção única de Objetivas -->
+        <div id="section-obj" class="question-section active">
             <div id="obj-questions"></div>
             <div class="action-bar">
                 <div>
@@ -352,356 +305,317 @@
 
     <script>
         // ------------------------------------------------------------
-        // 1. QUESTÕES V/F com explicação
+        // BANCO DE QUESTÕES (20 no total)
         // ------------------------------------------------------------
-        const vfQuestions = [
-            { id: 1, text: 'O crime de motim (Art. 149) exige que os militares estejam armados para sua configuração; caso contrário, a conduta é atípica.', answer: false, explanation: 'O motim exige que os militares estejam DESARMADOS. Se estiverem armados, a conduta configura REVOLTA (Art. 149, parágrafo único), que é forma qualificada e mais grave.' },
-            { id: 2, text: 'A revolta (Art. 149, parágrafo único) é uma forma qualificada do motim, punida com reclusão de 8 a 20 anos, e os "cabeças" têm a pena aumentada de 1/3.', answer: true, explanation: 'Correto. A revolta é o motim praticado por militares armados. A pena-base é de 8 a 20 anos de reclusão, com aumento de 1/3 para os líderes (cabeças).' },
-            { id: 3, text: 'O militar que toma conhecimento da preparação de um motim e não comunica o superior comete o crime de omissão de lealdade militar (Art. 151), com pena de reclusão de 3 a 5 anos.', answer: true, explanation: 'Correto. O Art. 151 pune quem, tendo notícia da preparação de motim ou revolta, deixa de avisar o superior, ou, estando presente, não usa os meios para impedir.' },
-            { id: 4, text: 'A violência contra superior (Art. 157) tem sua pena aumentada se o crime for cometido contra oficial de serviço, com emprego de arma, ou se resultar em lesão grave, mas não em morte.', answer: false, explanation: 'Se resultar em MORTE, a pena é de reclusão de 12 a 30 anos (Art. 157, § 2º). Portanto, a morte também é causa de aumento (na verdade, é uma hipótese de pena muito mais grave).' },
-            { id: 5, text: 'O crime de despojamento desprezível (Art. 162) configura-se quando o militar se despoja de uniforme, condecoração ou insígnia por menosprezo, com aumento de metade da pena se praticado diante da tropa ou em público.', answer: true, explanation: 'Correto. O Art. 162 prevê detenção de 6 meses a 1 ano, com aumento de metade se praticado diante da tropa ou em público.' },
-            { id: 6, text: 'A recusa de obediência (Art. 163) punível com detenção de 1 a 2 anos exige que a ordem descumprida seja sobre matéria de serviço ou dever militar, e que o agente seja militar da ativa.', answer: true, explanation: 'Correto. O tipo penal exige ordem sobre serviço ou dever militar, e o sujeito ativo é o militar (da ativa ou equiparado).' },
-            { id: 7, text: 'A crítica indevida (Art. 166) consiste em criticar publicamente ato de superior, disciplina militar ou resolução do Governo, sendo punida com detenção de 6 meses a 1 ano.', answer: true, explanation: 'Correto. O Art. 166 pune a crítica pública a ato de superior, à disciplina militar ou a resolução do Governo, com detenção de 6 meses a 1 ano.' },
-            { id: 8, text: 'O rigor excessivo (Art. 174) e a violência contra inferior (Art. 175) são crimes que só podem ser cometidos por oficiais contra praças, não se aplicando a relações entre militares de mesma patente.', answer: false, explanation: 'Os crimes são cometidos por superior contra inferior hierárquico, independentemente de ser oficial ou praça. Um sargento pode cometer contra um soldado, por exemplo.' },
-            { id: 9, text: 'A ofensa aviltante (Art. 176) caracteriza-se pela violência moral ou física que, por sua natureza, seja considerada humilhante, sendo punida com detenção de 1 mês a 2 anos.', answer: true, explanation: 'Correto. O Art. 176 pune a violência moral ou física de natureza humilhante ou aviltante, com detenção de 1 mês a 2 anos.' },
-            { id: 10, text: 'O crime de deserção (Art. 187) consuma-se no 8º dia de ausência injustificada, e o prazo de graça de 8 dias é contado a partir da zero hora do dia seguinte ao da constatação da falta (Art. 451 do CPPM).', answer: false, explanation: 'A deserção se consuma no 9º dia de ausência (após o 8º dia). O prazo de graça é de 8 dias, e a contagem se inicia à zero hora do dia seguinte à falta (Art. 451 do CPPM).' },
-            { id: 11, text: 'A deserção especial (Art. 190) não admite prazo de graça, consumando-se no momento da partida do navio, aeronave ou deslocamento da tropa, sendo a pena agravada para oficiais.', answer: true, explanation: 'Correto. A deserção especial ocorre quando o militar deixa de se apresentar no momento da partida. Não há prazo de graça. A pena é aumentada em 1/3 para sargentos/subtenentes e 1/2 para oficiais.' },
-            { id: 12, text: 'O concerto para deserção (Art. 191) exige a participação de pelo menos dois militares e, na modalidade complexa, a pena pode ser de reclusão.', answer: true, explanation: 'Correto. O concerto exige pluralidade de militares. Na modalidade simples é detenção; na complexa (se a deserção é efetivamente consumada), a pena é de reclusão.' },
-            { id: 13, text: 'O favorecimento de desertor (Art. 193) prevê isenção de pena para ascendentes, descendentes, cônjuges e irmãos do desertor, conforme o parágrafo único do artigo.', answer: true, explanation: 'Correto. O parágrafo único do Art. 193 isenta de pena o ascendente, descendente, cônjuge ou irmão que favorece o desertor.' },
-            { id: 14, text: 'A Lei nº 13.491/2017 ampliou a competência da Justiça Militar para incluir crimes previstos em leis especiais (ex.: Tortura, Lei de Drogas, Abuso de Autoridade) desde que praticados nas condições do Art. 9º, II do CPM.', answer: true, explanation: 'Correto. A Lei 13.491/2017 criou os "crimes militares por extensão", equiparando crimes da legislação comum quando praticados por militar em serviço, em lugar militar ou contra militar da ativa.' },
-            { id: 15, text: 'De acordo com a Lei 13.491/2017, o crime de abuso de autoridade (Lei 13.869/2019) praticado por militar em serviço é considerado crime militar por extensão, sendo julgado pela Justiça Militar.', answer: true, explanation: 'Correto. O abuso de autoridade, quando praticado por militar em serviço ou em razão da função, enquadra-se como crime militar por extensão (Art. 9º, II, "c").' },
-            { id: 16, text: 'A Súmula 53 do STJ estabelece que a Justiça Militar Estadual pode julgar civis em casos de crimes cometidos contra a administração militar, desde que haja previsão no CPM.', answer: false, explanation: 'A Súmula 53 do STJ veda o julgamento de civis pela Justiça Militar Estadual. Apenas a Justiça Militar da União pode julgar civis (Art. 9º, III do CPM).' },
-            { id: 17, text: 'Os crimes dolosos contra a vida de civis praticados por policiais militares estaduais são de competência do Tribunal do Júri, conforme entendimento consolidado do STF e redação do Art. 9º, § 1º do CPM.', answer: true, explanation: 'Correto. O Art. 9º, § 1º do CPM (redação da Lei 13.491/2017) estabelece que os crimes dolosos contra a vida de civis são de competência do Tribunal do Júri.' },
-            { id: 18, text: 'O princípio da insignificância é aplicável na Justiça Militar para crimes de posse de drogas em quartel, desde que a quantidade seja ínfima, conforme jurisprudência do STF.', answer: false, explanation: 'O STF e o STM entendem que a posse de drogas em quartel, por menor que seja, fere a disciplina e a segurança da tropa, sendo inaplicável o princípio da insignificância.' },
-            { id: 19, text: 'A Lei nº 14.688/2023 extinguiu a figura do "assemelhado" no CPM (Art. 21) e reformulou o Art. 290, aumentando as penas para tráfico de drogas em área militar e prevendo punição para o militar que se apresenta sob efeito de entorpecentes em serviço.', answer: true, explanation: 'Correto. A Lei 14.688/2023 revogou o Art. 21 (assemelhado) e reformulou o Art. 290, com penas mais severas para tráfico e previsão de reclusão de até 4 anos para o militar sob efeito de drogas em serviço.' },
-            { id: 20, text: 'A nova redação do Art. 232 do CPM, dada pela Lei 14.688/2023, incluiu expressamente o crime de estupro de vulnerável (§ 3º), para menores de 14 anos ou pessoas incapazes de resistência.', answer: true, explanation: 'Correto. A Lei 14.688/2023 modernizou o Art. 232, retirando expressões arcaicas e inserindo o estupro de vulnerável no § 3º.' },
-            { id: 21, text: 'O IPM é um procedimento administrativo, sigiloso e inquisitorial, que não admite a participação de defensor técnico durante a fase investigativa, conforme o Art. 16 do CPPM.', answer: false, explanation: 'Embora o IPM seja sigiloso e inquisitorial, a Súmula Vinculante 14 do STF garante ao advogado o acesso aos elementos de prova já documentados. Além disso, o Art. 16-A do CPPM (Pacote Anticrime) assegura defesa técnica.' },
-            { id: 22, text: 'No IPM, o prazo para conclusão quando o indiciado está preso é de 20 dias improrrogáveis, enquanto para o solto é de 40 dias, prorrogável por mais 20 dias.', answer: true, explanation: 'Correto. Art. 20 do CPPM: preso → 20 dias (improrrogável); solto → 40 dias + 20 (prorrogação).' },
-            { id: 23, text: 'A autoridade militar que preside o IPM pode determinar o arquivamento dos autos se concluir pela inexistência de crime militar (Art. 24 do CPPM).', answer: false, explanation: 'O Art. 24 do CPPM proíbe a autoridade militar de arquivar o IPM. O arquivamento é ato exclusivo do Juiz, mediante requerimento do Ministério Público Militar.' },
-            { id: 24, text: 'No Conselho de Justiça, o Juiz de Direito Militar (togado) vota em primeiro lugar, e os juízes militares votam do mais moderno ao mais antigo, cabendo ao Presidente (oficial mais antigo) o voto final.', answer: true, explanation: 'Correto. Art. 435 do CPPM: vota primeiro o Juiz de Direito, depois os oficiais do mais moderno ao mais antigo, e por último o Presidente.' },
-            { id: 25, text: 'O Conselho de Justiça Especial é destinado ao julgamento de oficiais, sendo formado especificamente para cada processo, enquanto o Conselho Permanente julga praças e tem seus membros sorteados trimestralmente.', answer: true, explanation: 'Correto. O Conselho Especial julga oficiais e é formado para cada caso. O Permanente julga praças e tem composição trimestral.' },
-            { id: 26, text: 'A inquirição de testemunhas no IPM deve observar a incomunicabilidade (Art. 353), sendo as testemunhas ouvidas separadamente para evitar contaminação de narrativas.', answer: true, explanation: 'Correto. O Art. 353 do CPPM determina que as testemunhas sejam inquiridas separadamente (regra "de per si").' },
-            { id: 27, text: 'As testemunhas no processo penal militar são obrigadas a depor, mas os profissionais com sigilo de ofício (advogados, médicos, etc.) são proibidos de depor, salvo se a parte interessada desobrigar o sigilo e o depoente concordar.', answer: true, explanation: 'Correto. Art. 355 do CPPM: proibição absoluta para profissionais com sigilo, que só pode ser quebrada com a concordância do interessado e do depoente.' },
-            { id: 28, text: 'O interrogatório do réu no CPPM, segundo a literalidade do Art. 302, é o último ato da instrução, mas o STF, no HC 127.900/AM, determinou que deve ser o primeiro ato, em homenagem à ampla defesa.', answer: false, explanation: 'O Art. 302 do CPPM prevê o interrogatório como o PRIMEIRO ato da instrução. O STF, no HC 127.900/AM, determinou que, por analogia ao CPP, deve ser o ÚLTIMO ato, para garantir a ampla defesa.' },
-            { id: 29, text: 'Em caso de divergência entre o CPPM e tratados internacionais de direitos humanos ratificados pelo Brasil, prevalecem as normas do CPPM, por ser lei especial (Art. 1º, § 1º do CPPM).', answer: false, explanation: 'O Art. 1º, § 1º do CPPM estabelece exatamente o contrário: prevalecem as normas dos tratados internacionais em caso de divergência.' },
-            { id: 30, text: 'O CPPM aplica-se subsidiariamente às leis penais especiais (como a Lei de Tortura e a Lei de Abuso de Autoridade) para suprir lacunas procedimentais, conforme o Art. 1º, § 2º do CPPM.', answer: true, explanation: 'Correto. O Art. 1º, § 2º do CPPM prevê a aplicação subsidiária do CPPM a processos regulados em leis especiais, quando omissas.' }
+        const objQuestions = [
+            // ========== PARTE 1: DIREITO PENAL E PROCESSUAL PENAL MILITAR ==========
+            {
+                id: 1,
+                text: 'Um Policial Militar estadual em serviço comete homicídio doloso contra um civil durante uma abordagem de rotina. Paralelamente, um militar do Exército Brasileiro, atuando no cumprimento de missão de Garantia da Lei e da Ordem (GLO), também comete homicídio doloso contra um civil. Assinale a alternativa correta quanto à competência jurisdicional para o julgamento dos dois casos:',
+                options: [
+                    'Ambos os militares serão julgados pelo Tribunal do Júri da Justiça Comum.',
+                    'O Policial Militar será julgado pela Justiça Militar Estadual, e o militar do Exército pelo Tribunal do Júri.',
+                    'O Policial Militar será julgado pelo Tribunal do Júri, e o militar do Exército pela Justiça Militar da União (JMU).',
+                    'Ambos os militares serão julgados pela Justiça Militar, dada a condição de serviço no momento do fato.'
+                ],
+                correct: 2,
+                explanation: 'Regra de Ouro da Competência: Homicídio doloso praticado por militar estadual contra civil vai ao Júri. Já para militares das Forças Armadas (JMU), se praticado em GLO, a competência é mantida na JMU.'
+            },
+            {
+                id: 2,
+                text: 'No tocante à competência das Justiças Militares Estadual (JME) e da União (JMU) para processar e julgar civis que cometem infrações penais, assinale a afirmativa correta:',
+                options: [
+                    'Nem a Justiça Militar Estadual nem a Justiça Militar da União possuem competência para julgar civis.',
+                    'A Justiça Militar Estadual julga civis quando o crime for praticado contra o patrimônio da Polícia Militar.',
+                    'A Justiça Militar da União pode julgar civis quando atentarem contra o patrimônio ou a ordem militar federal, sendo o julgamento feito monocraticamente pelo Juiz Federal da Justiça Militar.',
+                    'A Justiça Militar da União julga civis por meio do Conselho Permanente de Justiça, composto por oficiais das Forças Armadas.'
+                ],
+                correct: 2,
+                explanation: 'A JME nunca julga civis. A JMU pode julgar civis que atentem contra as Forças Armadas, sendo o julgamento feito monocraticamente pelo Juiz Federal da Justiça Militar.'
+            },
+            {
+                id: 3,
+                text: 'Um soldado da ativa furta a quantia de R$ 5,00 do armário de outro colega de farda dentro do alojamento do quartel. A defesa requereu o trancamento da ação penal militar alegando o Princípio da Insignificância (crime de bagatela). De acordo com a jurisprudência das Cortes Superiores e a doutrina militar:',
+                options: [
+                    'Aplica-se a insignificância, pois o valor financeiro irrisório afasta a tipicidade material do crime de furto.',
+                    'Inaplica-se a insignificância, pois o furto no quartel afeta a hierarquia, a disciplina e a confiança necessárias para a convivência na caserna.',
+                    'Aplica-se o benefício, devendo o fato ser convertido apenas em sanção administrativa por ter ocorrido sem violência.',
+                    'Inaplica-se a insignificância apenas se o militar tiver maus antecedentes registrados no seu assentamento.'
+                ],
+                correct: 1,
+                explanation: 'O furto entre militares no quartel destrói a confiança e a coesão da tropa (afeta a hierarquia e disciplina), não se admitindo a tese de bagatela/insignificância.'
+            },
+            {
+                id: 4,
+                text: 'Segundo o entendimento consolidado do Supremo Tribunal Federal (STF - HC 127.909/SP) sobre a posse de quantidade insignificante de drogas (ex: 0,14g de maconha) por militar no interior de Organização Militar:',
+                options: [
+                    'É cabível o princípio da insignificância, aplicando-se a Lei de Drogas (Lei nº 11.343/2006) com penas restritivas de direitos.',
+                    'A conduta é atípica na esfera penal militar, configurando meramente falta disciplinar de gravidade média.',
+                    'Inaplica-se a insignificância, pois a introdução de entorpecentes no ambiente militar avilta a instituição, vulnera o dever de vigilância e coloca a tropa em risco.',
+                    'Depende do prévio exame toxicológico no militar para atestar se ele era usuário dependente antes do trancamento.'
+                ],
+                correct: 2,
+                explanation: 'Drogas no ambiente militar vulneram a segurança e o dever de vigilância, sendo inaplicável o princípio da insignificância, mesmo em quantidades irrisórias.'
+            },
+            {
+                id: 5,
+                text: 'Conforme disposto no Art. 247 do Código de Processo Penal Militar (CPPM), a Nota de Culpa é a garantia formal dada ao militar preso em flagrante. Sobre as suas regras, assinale a opção correta:',
+                options: [
+                    'Deve ser entregue ao preso no prazo improrrogável de até 24 horas após a efetivação da prisão.',
+                    'Sua entrega pode ser diferida por até 5 dias mediante autorização fundamentada do Promotor de Justiça Militar.',
+                    'Não requer obrigatoriamente a assinatura ou menção ao nome das testemunhas e do condutor.',
+                    'A inobservância do prazo de emissão da Nota de Culpa constitui mera irregularidade administrativa, não afetando a legalidade da prisão.'
+                ],
+                correct: 0,
+                explanation: 'Art. 247, CPPM: A Nota de Culpa deve ser entregue em até 24 horas da prisão em flagrante. O descumprimento gera ilegalidade da prisão e relaxamento judicial.'
+            },
+            {
+                id: 6,
+                text: 'Um militar da ativa deveria se apresentar na sua unidade no dia 10 de maio, às 08h00, mas deixou de fazê-lo injustificadamente. Para fins de contagem do prazo de graça (8 dias) e consumação do crime de deserção comum (Art. 187 do CPM), a "Regra da Meia-Noite" (Art. 451 do CPPM) estabelece que:',
+                options: [
+                    'A contagem dos 8 dias inicia-se imediatamente às 08h01 do dia 10 de maio.',
+                    'O prazo de graça começa a fluir à zero hora do dia 11 de maio (dia seguinte), consumando-se o crime à zero hora do dia 19 de maio.',
+                    'O crime de deserção se consuma exatamente às 08h00 do 8º dia subsequente à falta.',
+                    'Durante os primeiros 8 dias, o militar já responde pelo crime de deserção tentada.'
+                ],
+                correct: 1,
+                explanation: 'Regra da Meia-Noite (Art. 451, CPPM): O prazo de graça (8 dias) não conta no dia da falta; inicia na 00:00h do dia seguinte (dia 11) e o crime se consuma na 00:00h do 9º dia (dia 19).'
+            },
+            {
+                id: 7,
+                text: 'Acerca das modalidades específicas do crime de deserção previstas no Código Penal Militar, analise as afirmativas: I. A Deserção Especial (Art. 190) ocorre quando o militar deixa de se apresentar na partida de navio ou aeronave de cuja tripulação faz parte, não exigindo o prazo de graça de 8 dias. II. O Favorecimento a Desertor (Art. 193) prevê isenção de pena se o favorecedor for ascendente, descendente, cônjuge ou irmão do desertor. III. A apresentação voluntária do desertor em até 8 dias após a consumação do crime extingue integralmente a punibilidade. Está(ão) correta(s):',
+                options: [
+                    'Apenas a afirmativa I.',
+                    'Apenas as afirmativas I e II.',
+                    'Apenas as afirmativas II e III.',
+                    'Todas as afirmativas (I, II e III).'
+                ],
+                correct: 1,
+                explanation: 'Arts. 190, 193 e 189 do CPM: As afirmativas I e II estão corretas. A III está errada, pois o retorno em até 8 dias reduz a pena pela metade (atenuante), não extinguindo a punibilidade.'
+            },
+            {
+                id: 8,
+                text: 'Com as alterações promovidas pela Lei nº 13.491/2017 no Código Penal Militar, passou-se a admitir os chamados "crimes militares por extensão". Assinale a alternativa que define corretamente esse conceito:',
+                options: [
+                    'São crimes previstos exclusivamente no Código Penal Militar que passam a ser julgados pelos juízes da Justiça Comum.',
+                    'São infrações penais previstas unicamente na legislação penal comum/extravagante que, quando praticadas por militar nas hipóteses do Art. 9º do CPM, transmudam-se em crimes militares.',
+                    'São condutas atípicas na lei penal comum, mas que são punidas como crime na Justiça Militar por ferirem o Regulamento Disciplinar.',
+                    'São crimes militares praticados obrigatoriamente em coautoria entre um militar e um civil.'
+                ],
+                correct: 1,
+                explanation: 'Lei nº 13.491/2017: Criou os crimes militares por extensão (previstos apenas na legislação penal comum extravagante, mas julgados pela Justiça Militar quando no Art. 9º do CPM).'
+            },
+            {
+                id: 9,
+                text: 'Um policial militar, estando em serviço e valendo-se do cargo, submete um preso sob sua custódia a intenso sofrimento físico como forma de aplicar-lhe castigo pessoal (Crime de Tortura - Lei nº 9.455/1997). Considerando a disciplina da Lei nº 13.491/2017, este fato constitui:',
+                options: [
+                    'Crime comum de tortura, de competência da Justiça Comum Estadual.',
+                    'Crime militar por extensão, cuja competência para processar e julgar pertence à Justiça Militar.',
+                    'Infração exclusivamente disciplinar, inaplicável a esfera penal à atividade militar.',
+                    'Crime de abuso de autoridade absorvido pelo Código Penal Comum.'
+                ],
+                correct: 1,
+                explanation: 'Lei de Tortura + Lei 13.491/2017: Por ter sido cometido por militar em serviço, o crime de tortura (Lei 9.455/97) torna-se crime militar por extensão de competência da Justiça Militar.'
+            },
+            {
+                id: 10,
+                text: 'Sobre a Ação Penal Militar e a atuação do Ministério Público Militar (MPM) diante das conclusões do Inquérito Policial Militar (IPM), assinale a afirmativa correta:',
+                options: [
+                    'A Ação Penal Militar pode ser privada subsidiária da pública caso o MPM não ofereça denúncia no prazo de 30 dias.',
+                    'Vigora no Processo Penal Militar o princípio da obrigatoriedade, devendo o MPM denunciar o indiciado quando houver prova do fato e indícios suficientes de autoria.',
+                    'O Comandante da Organização Militar pode determinar o arquivamento do IPM caso entenda que o fato não afetou a disciplina da unidade.',
+                    'O prazo para o oferecimento da denúncia pelo MPM é de 10 dias para indiciado preso e 30 dias para indiciado solto.'
+                ],
+                correct: 1,
+                explanation: 'Arts. 30 e 79 do CPPM: A ação penal militar é pública incondicionada sob o princípio da obrigatoriedade. Os prazos para denúncia são de 5 dias (preso) e 15 dias (solto). Comandante não arquiva IPM.'
+            },
+
+            // ========== PARTE 2: INQUÉRITO POLICIAL MILITAR (IPM) ==========
+            {
+                id: 11,
+                text: 'Em tempo de paz, instaurado Inquérito Policial Militar (IPM) para apurar a autoria de crime militar praticado por praça que se encontra preso preventivamente, o encarregado do IPM terá o prazo improrrogável de:',
+                options: [
+                    '10 dias, contados da instauração do IPM.',
+                    '20 dias, contados do dia em que se executar a ordem de prisão.',
+                    '30 dias, prorrogáveis por mais 15 dias pelo juiz auditor.',
+                    '40 dias, prorrogáveis por mais 20 dias a pedido fundamentado.'
+                ],
+                correct: 1,
+                explanation: 'Art. 20, caput, CPPM: O IPM deve ser concluído em 20 dias se o indiciado estiver preso, contados do dia em que se executar a ordem de prisão (prazo improrrogável em tempo de paz).'
+            },
+            {
+                id: 12,
+                text: 'Quando o indiciado estiver em liberdade, o prazo para a conclusão do Inquérito Policial Militar (IPM) é de 40 dias. Caso a causa seja de difícil elucidação, este prazo poderá ser prorrogado por mais:',
+                options: [
+                    '10 dias, por decisão sumária do comandante do batalhão.',
+                    '15 dias, mediante autorização do Ministério Público Militar.',
+                    '20 dias, concedidos pela autoridade judiciária competente.',
+                    '40 dias, bastando a prorrogação no boletim interno da unidade.'
+                ],
+                correct: 2,
+                explanation: 'Art. 20, §1º, CPPM: Se o indiciado estiver solto, o prazo é de 40 dias, podendo ser prorrogado por mais 20 dias pela autoridade judiciária competente.'
+            },
+            {
+                id: 13,
+                text: 'No caso de prisão em flagrante delito de militar, a comunicação imediata à autoridade judiciária competente e a entrega da respectiva Nota de Culpa assinada pela autoridade devem ocorrer no prazo máximo de:',
+                options: [
+                    '12 horas.',
+                    '24 horas.',
+                    '48 horas.',
+                    '72 horas.'
+                ],
+                correct: 2,
+                explanation: 'Arts. 247 e 250, CPPM: A comunicação da prisão em flagrante ao juiz e a entrega da Nota de Culpa ao preso devem ser efetuadas em até 48 horas.'
+            },
+            {
+                id: 14,
+                text: 'Após receber os autos do Inquérito Policial Militar referentes a um indiciado que se encontra preso, o Ministério Público Militar (MPM) terá o prazo legal para oferecer a denúncia de:',
+                options: [
+                    '5 dias.',
+                    '8 dias.',
+                    '10 dias.',
+                    '15 dias.'
+                ],
+                correct: 0,
+                explanation: 'Art. 79, caput, CPPM: O prazo para o MPM oferecer a denúncia é de 5 dias estando o réu preso.'
+            },
+            {
+                id: 15,
+                text: 'Nos casos em que o indiciado responda às investigações em liberdade, o Promotor de Justiça Militar disporá do prazo de:',
+                options: [
+                    '5 dias para oferecer a denúncia ou pedir arquivamento.',
+                    '10 dias para expedir a notificação prévia de acusação.',
+                    '15 dias para o oferecimento da denúncia ao Juízo Militar.',
+                    '30 dias improrrogáveis para a propositura da ação penal militar.'
+                ],
+                correct: 2,
+                explanation: 'Art. 79, caput, CPPM: Estando o réu solto, o prazo legal para o oferecimento da denúncia pelo órgão acusador é de 15 dias.'
+            },
+            {
+                id: 16,
+                text: 'Encerrada a fase de instrução criminal no processo penal militar (oitiva de testemunhas e interrogatório), o Ministério Público e a Defesa apresentarão suas alegações finais escritas (Art. 428 do CPPM) no prazo sucessivo de:',
+                options: [
+                    '3 dias para cada parte.',
+                    '5 dias para o MPM e 5 dias para a Defesa.',
+                    '8 dias para o MPM e 8 dias para a Defesa.',
+                    '15 dias comuns para ambas as partes.'
+                ],
+                correct: 2,
+                explanation: 'Art. 428, CPPM: Encerrada a instrução, o prazo para alegações escritas é de 8 dias para o Ministério Público e de 8 dias para a Defesa (sucessivos).'
+            },
+            {
+                id: 17,
+                text: 'Sobre as características e a natureza do Inquérito Policial Militar (IPM), assinale a afirmativa correta:',
+                options: [
+                    'É uma fase judicial indispensável da Ação Penal Militar.',
+                    'Trata-se de procedimento administrativo-informativo com a finalidade de apurar a autoria e a materialidade de infrações penais militares.',
+                    'Suas nulidades anulam automaticamente o processo judicial subsequente.',
+                    'Possui caráter estritamente acusatório, exigindo o contraditório pleno antes de seu encerramento.'
+                ],
+                correct: 1,
+                explanation: 'Arts. 9º ao 12, CPPM: O IPM é um procedimento administrativo pré-processual, informativo e dispensável; vício no IPM não anula a ação penal.'
+            },
+            {
+                id: 18,
+                text: 'No âmbito do Processo Penal Militar, o encarregado do IPM deve possuir posto superior ao do indiciado. Caso o indiciado seja um Oficial Superior (ex: Tenente-Coronel), a delegação para a abertura e condução do IPM deverá recair sobre:',
+                options: [
+                    'Um Capitão mais antigo da unidade militar.',
+                    'Um Oficial de posto superior ou mais antigo que o indiciado.',
+                    'Exclusivamente o Juiz de Direito do Juízo Militar.',
+                    'O Promotor de Justiça Militar com atribuição na Auditoria Militar.'
+                ],
+                correct: 1,
+                explanation: 'Art. 7º, §1º, CPPM: A designação do encarregado deverá recair em oficial de posto superior ao do indiciado ou mais antigo, caso haja igualdade de posto.'
+            },
+            {
+                id: 19,
+                text: 'Após a conclusão das diligências no IPM, o Encarregado elaborará um relatório minucioso. Sobre a competência para o arquivamento do Inquérito Policial Militar, é correto afirmar que:',
+                options: [
+                    'O Encarregado do IPM pode mandar arquivar os autos se constatar inocência inequívoca.',
+                    'O Comandante da Unidade tem o poder discricionário de arquivar o IPM.',
+                    'O arquivamento só pode ser determinado pela Autoridade Judiciária competente, a requerimento do Ministério Público Militar.',
+                    'O encarregado deve propor o arquivamento diretamente à Corregedoria.'
+                ],
+                correct: 2,
+                explanation: 'Arts. 24 e 25, CPPM: Princípio da Indisponibilidade do Inquérito. A autoridade policial militar não pode arquivar IPM; o arquivamento é ato exclusivo do Juiz a requerimento do MPM.'
+            },
+            {
+                id: 20,
+                text: 'Nos termos do Art. 16 do CPPM, no que diz respeito à contagem dos prazos referentes à constrição da liberdade de locomoção e aos atos processuais/investigativos:',
+                options: [
+                    'Exclui-se o dia do início e inclui-se o dia do vencimento em todas as hipóteses.',
+                    'O prazo do IPM de réu preso conta-se do dia em que se executar a ordem de prisão, incluindo-se o dia do início.',
+                    'Os prazos são contados apenas em dias úteis durante o período de instrução.',
+                    'A contagem dos prazos é suspensa nos finais de semana e feriados em qualquer circunstância.'
+                ],
+                correct: 1,
+                explanation: 'Art. 16, CPPM / Regras Próprias do Direito Penal Militar: No prazo do IPM de réu preso, inclui-se o dia do início por afetar a liberdade individual do indiciado.'
+            }
         ];
 
         // ------------------------------------------------------------
-        // 2. QUESTÕES OBJETIVAS com explicação
-        // ------------------------------------------------------------
-        const objQuestions = [{
-            id: 1,
-            text: 'De acordo com o Código Penal Militar, o crime de motim (Art. 149) se caracteriza por:',
-            options: [
-                'Reunião de militares armados que se recusam a obedecer ordens.',
-                'Reunião de militares desarmados agindo contra ordem, recusando obediência ou ocupando quartel.',
-                'Ação individual de um militar que se recusa a cumprir ordem.',
-                'Conjunto de militares que planejam a deserção.'
-            ],
-            correct: 1,
-            explanation: 'O motim exige reunião de militares DESARMADOS. Se armados, é REVOLTA (Art. 149, parágrafo único). Ação individual é insubordinação, e planejar deserção é concerto para deserção (Art. 191).'
-        }, {
-            id: 2,
-            text: 'A Lei nº 13.491/2017 introduziu no ordenamento militar a figura dos "crimes por extensão". Qual das alternativas abaixo NÃO se enquadra como crime militar por extensão?',
-            options: [
-                'Tortura (Lei 9.455/97) praticada por militar em serviço.',
-                'Tráfico de drogas (Lei 11.343/06) em área militar.',
-                'Furto de uso de viatura militar (Art. 241 do CPM).',
-                'Abuso de autoridade (Lei 13.869/19) praticado por militar no exercício da função.'
-            ],
-            correct: 2,
-            explanation: 'O furto de uso (Art. 241) é crime PROPRIAMENTE MILITAR, previsto no CPM. Os demais são crimes previstos em leis especiais que, nas condições do Art. 9º, II, tornam-se militares por extensão.'
-        }, {
-            id: 3,
-            text: 'Sobre o Inquérito Policial Militar (IPM), assinale a alternativa correta:',
-            options: [
-                'O IPM é um procedimento judicial, sujeito ao contraditório pleno desde a sua instauração.',
-                'O encarregado do IPM pode arquivar o inquérito se concluir pela atipicidade da conduta.',
-                'O IPM é sigiloso, mas o advogado tem acesso aos elementos de prova já documentados (Súmula Vinculante 14).',
-                'O prazo para conclusão do IPM com indiciado preso é de 40 dias, prorrogável por igual período.'
-            ],
-            correct: 2,
-            explanation: 'O IPM é administrativo, sigiloso e inquisitorial. A Súmula Vinculante 14 garante acesso do advogado às provas documentadas. O prazo para preso é de 20 dias (não 40), e o arquivamento é vedado ao encarregado (Art. 24).'
-        }, {
-            id: 4,
-            text: 'Qual a principal diferença entre o crime de deserção comum (Art. 187) e a deserção especial (Art. 190)?',
-            options: [
-                'A deserção especial exige que o militar esteja armado.',
-                'A deserção comum não admite o retorno voluntário como atenuante.',
-                'A deserção especial não possui prazo de graça de 8 dias, consumando-se no evento da partida.',
-                'A deserção comum só se aplica a oficiais.'
-            ],
-            correct: 2,
-            explanation: 'A deserção especial (Art. 190) ocorre quando o militar deixa de se apresentar no momento da partida do navio/aeronave ou deslocamento da tropa. Não há prazo de graça. A comum exige ausência > 8 dias.'
-        }, {
-            id: 5,
-            text: 'De acordo com a Lei nº 14.688/2023, qual das seguintes alterações NÃO ocorreu no CPM?',
-            options: [
-                'Reformulação do crime de estupro, com previsão expressa de estupro de vulnerável.',
-                'Inclusão da qualificadora do feminicídio no Art. 205 (homicídio militar).',
-                'Extinção da figura do "assemelhado" (revogação do Art. 21).',
-                'Introdução da injúria qualificada por preconceito (Art. 216, § 2º).'
-            ],
-            correct: 1,
-            explanation: 'A Lei 14.688/2023 NÃO incluiu o feminicídio no CPM. O CPM ainda não prevê essa qualificadora. As demais alternativas são alterações reais da lei.'
-        }, {
-            id: 6,
-            text: 'No Processo Penal Militar, a ordem de votação no Conselho de Justiça (Art. 435 do CPPM) obedece à seguinte sequência:',
-            options: [
-                'Juiz de Direito (togado) → Oficiais mais antigos → Oficiais mais modernos → Presidente.',
-                'Oficiais mais modernos → Oficiais mais antigos → Juiz de Direito → Presidente.',
-                'Juiz de Direito → Oficiais do mais moderno ao mais antigo → Presidente.',
-                'Presidente → Juiz de Direito → Oficiais do mais antigo ao mais moderno.'
-            ],
-            correct: 2,
-            explanation: 'Art. 435 do CPPM: primeiro vota o Juiz de Direito, depois os oficiais do mais moderno ao mais antigo, e por último o Presidente (oficial mais antigo).'
-        }, {
-            id: 7,
-            text: 'Sobre os crimes contra a honra no CPM, é correto afirmar que:',
-            options: [
-                'A pena dos crimes de calúnia, difamação e injúria é aumentada em 1/3 se cometidos contra superior ou inferior hierárquico (Art. 218).',
-                'A injúria qualificada por preconceito foi revogada pela Lei 14.688/2023.',
-                'Os crimes contra a honra no CPM não preveem aumento de pena, diferentemente do Código Penal comum.',
-                'A pena do crime de difamação é de reclusão, enquanto no Código Penal comum é de detenção.'
-            ],
-            correct: 0,
-            explanation: 'O Art. 218 do CPM prevê aumento de 1/3 se o crime contra a honra for cometido contra superior ou inferior, ou na presença de público, ou em lugar sujeito à administração militar.'
-        }, {
-            id: 8,
-            text: 'O princípio da insignificância (bagatela) na Justiça Militar, segundo o STF e o STM:',
-            options: [
-                'É aplicado da mesma forma que na Justiça comum, inclusive para posse de drogas em quartel.',
-                'Não se aplica aos crimes de entorpecentes em ambiente militar, pois a disciplina e a hierarquia são bens jurídicos primordiais.',
-                'É vedado por completo em qualquer crime militar, independentemente do valor.',
-                'Só se aplica a crimes patrimoniais de pequeno valor, não a crimes contra a pessoa.'
-            ],
-            correct: 1,
-            explanation: 'O STF e o STM têm entendimento consolidado de que a posse de drogas em quartel, mesmo em pequena quantidade, afeta a disciplina e a segurança da tropa, sendo inaplicável o princípio da insignificância.'
-        }, {
-            id: 9,
-            text: 'O crime de abandono de posto (Art. 195) se diferencia da deserção porque:',
-            options: [
-                'O abandono de posto exige ausência superior a 8 dias.',
-                'O abandono de posto é crime de perigo abstrato, consumando-se no momento da saída sem ordem.',
-                'O abandono de posto só se aplica a oficiais.',
-                'A pena do abandono de posto é de reclusão, enquanto a da deserção é de detenção.'
-            ],
-            correct: 1,
-            explanation: 'O abandono de posto é crime de perigo abstrato, consumando-se com a simples saída do local de serviço sem ordem. Já a deserção exige ausência por mais de 8 dias.'
-        }, {
-            id: 10,
-            text: 'Em relação ao favorecimento de desertor (Art. 193), assinale a alternativa correta:',
-            options: [
-                'O favorecimento é sempre crime, sem exceções.',
-                'Ascendentes, descendentes, cônjuges e irmãos do desertor são isentos de pena.',
-                'O oficial que omite a deserção de subordinado não comete crime.',
-                'O favorecimento é punido com reclusão de 1 a 3 anos.'
-            ],
-            correct: 1,
-            explanation: 'O parágrafo único do Art. 193 isenta de pena o ascendente, descendente, cônjuge ou irmão que favorece o desertor. O oficial que omite pode incorrer no Art. 194 (omissão de oficial).'
-        }, {
-            id: 11,
-            text: 'Sobre a competência da Justiça Militar, é correto afirmar:',
-            options: [
-                'A Justiça Militar da União não julga civis, apenas militares federais.',
-                'Os crimes dolosos contra a vida de civis praticados por policiais militares estaduais são julgados pelo Tribunal do Júri.',
-                'A Justiça Militar Estadual tem competência para julgar civis que cometam crimes contra a administração militar.',
-                'A Lei 13.491/2017 restringiu a competência da Justiça Militar apenas a crimes previstos no CPM.'
-            ],
-            correct: 1,
-            explanation: 'O Art. 9º, § 1º do CPM (Lei 13.491/2017) estabelece que os crimes dolosos contra a vida de civis praticados por militares estaduais são de competência do Tribunal do Júri. A JME não julga civis (Súmula 53 STJ).'
-        }, {
-            id: 12,
-            text: 'No âmbito do IPM, a inquirição de testemunhas deve observar:',
-            options: [
-                'Inquirição conjunta para confrontar versões.',
-                'Incomunicabilidade, ou seja, as testemunhas são inquiridas separadamente (Art. 353).',
-                'A testemunha pode manifestar livremente suas opiniões pessoais sobre o fato.',
-                'As testemunhas militares não podem ser inquiridas, apenas civis.'
-            ],
-            correct: 1,
-            explanation: 'O Art. 353 do CPPM determina que as testemunhas sejam inquiridas separadamente (regra "de per si") para evitar contaminação. Opiniões pessoais são vedadas (Art. 357).'
-        }, {
-            id: 13,
-            text: 'O crime de rigor excessivo (Art. 174) foi alterado pela Lei 14.688/2023, passando a prever:',
-            options: [
-                'Pena de reclusão de 2 a 4 anos.',
-                'Pena de detenção de 1 a 2 anos, se não constituir crime mais grave.',
-                'Aumento de 1/3 se praticado contra oficial.',
-                'Causa de exclusão da ilicitude se o subordinado der causa.'
-            ],
-            correct: 1,
-            explanation: 'A Lei 14.688/2023 alterou o Art. 174 para prever detenção de 1 a 2 anos, se o fato não constituir crime mais grave. Antes a pena era de 3 meses a 1 ano.'
-        }, {
-            id: 14,
-            text: 'De acordo com o Art. 9º do CPM, a equiparação de crimes previstos em leis especiais como crimes militares ocorre quando:',
-            options: [
-                'Apenas se o crime for praticado em tempo de guerra.',
-                'Se o crime for praticado por militar da ativa contra civil, em qualquer lugar.',
-                'Se o crime for praticado por militar em serviço ou em razão da função (nexo funcional).',
-                'Apenas se o crime for praticado dentro de quartel.'
-            ],
-            correct: 2,
-            explanation: 'O Art. 9º, II, "c" estabelece a equiparação quando o crime é praticado por militar em serviço ou atuando em razão da função (nexo funcional).'
-        }, {
-            id: 15,
-            text: 'O prazo para oferecimento da denúncia pelo Ministério Público Militar, quando o acusado está preso, é de:',
-            options: [
-                '5 dias, improrrogável.',
-                '10 dias, prorrogável por mais 5.',
-                '15 dias, prorrogável por igual período.',
-                '20 dias, prorrogável por mais 10.'
-            ],
-            correct: 0,
-            explanation: 'Art. 79 do CPPM: 5 dias para réu preso, improrrogável; 15 dias para réu solto (prorrogável até o triplo).'
-        }, {
-            id: 16,
-            text: 'A Súmula 14 do STM (Superior Tribunal Militar) trata da:',
-            options: [
-                'Inaplicabilidade da Lei de Drogas (11.343/06) à Justiça Militar, que continua regida pelo Art. 290 do CPM.',
-                'Aplicação do princípio da insignificância aos crimes de menor potencial ofensivo.',
-                'Competência do Tribunal do Júri para crimes dolosos contra a vida de civis.',
-                'Prazo para conclusão do IPM quando o indiciado é oficial.'
-            ],
-            correct: 0,
-            explanation: 'A Súmula 14 do STM estabelece que a Lei 11.343/06 não se aplica à Justiça Militar, que continua usando o Art. 290 do CPM para crimes de drogas em área militar.'
-        }, {
-            id: 17,
-            text: 'No que se refere ao Conselho de Justiça, é correto afirmar:',
-            options: [
-                'O Conselho Permanente julga oficiais, e o Especial julga praças.',
-                'O Juiz de Direito Militar (togado) preside a instrução e relata o processo, mas seu voto tem peso 1, igual ao dos juízes militares.',
-                'Os juízes militares são escolhidos por sorteio entre os oficiais de patente inferior à do réu.',
-                'A sentença é redigida pelo Presidente do Conselho, que é o oficial mais antigo.'
-            ],
-            correct: 1,
-            explanation: 'O Juiz de Direito Militar (togado) preside a instrução, relata e redige a sentença. Seu voto tem peso 1, assim como o de cada juiz militar. O Conselho Permanente julga praças; o Especial, oficiais.'
-        }, {
-            id: 18,
-            text: 'Segundo o CPM, o crime de violência contra militar de serviço (Art. 158) tem pena mais grave do que a violência contra superior comum (Art. 157) porque:',
-            options: [
-                'A vítima é sempre um oficial general.',
-                'O ataque é direto à segurança orgânica e à função de serviço.',
-                'A pena é de reclusão de 8 a 20 anos, independentemente do resultado.',
-                'Não há previsão de aumento de pena nesse caso.'
-            ],
-            correct: 1,
-            explanation: 'O Art. 158 protege o militar de serviço (oficial de dia, sentinela, plantão), pois o ataque a ele afeta diretamente a segurança orgânica da unidade, justificando a pena mais grave (reclusão de 3 a 8 anos).'
-        }, {
-            id: 19,
-            text: 'A Lei 14.688/2023 promoveu alterações significativas no Art. 290 (drogas). Assinale a correta:',
-            options: [
-                'A pena máxima para tráfico em área militar passou a ser de 10 anos.',
-                'O militar que se apresenta ou permanece sob efeito de entorpecentes em serviço pode ser punido com reclusão de até 4 anos.',
-                'A posse de drogas para uso próprio em quartel deixou de ser crime.',
-                'A pena do tráfico foi reduzida, equiparando-se à da lei comum.'
-            ],
-            correct: 1,
-            explanation: 'O novo § 3º do Art. 290 prevê reclusão de até 4 anos para o militar que se apresenta ou permanece sob efeito de entorpecentes em serviço. A pena máxima para tráfico é de 15 anos (não 10), e a posse continua sendo crime.'
-        }, {
-            id: 20,
-            text: 'Sobre a aplicação do Código de Processo Penal Militar (CPPM), é correto afirmar:',
-            options: [
-                'O CPPM não se aplica subsidiariamente a leis especiais (Art. 1º, § 2º).',
-                'Em caso de divergência entre o CPPM e tratados internacionais de direitos humanos, prevalece o CPPM (Art. 1º, § 1º).',
-                'O CPPM aplica-se subsidiariamente aos processos regulados em legislações extravagantes, preenchendo lacunas procedimentais.',
-                'O CPPM não admite a aplicação do contraditório diferido nas medidas invasivas.'
-            ],
-            correct: 2,
-            explanation: 'O Art. 1º, § 2º do CPPM prevê a aplicação subsidiária do CPPM a processos regulados em leis especiais, quando omissas. O § 1º estabelece a prevalência de tratados em caso de divergência.'
-        }];
-
-        // ------------------------------------------------------------
-        // 3. RENDERIZAÇÃO V/F com botão individual
-        // ------------------------------------------------------------
-        function renderVF() {
-            const container = document.getElementById('vf-questions');
-            let html = '';
-            vfQuestions.forEach((q, idx) => {
-                html += `
-                    <div class="question-card true-false" data-qid="${q.id}">
-                        <div class="question-text">${idx+1}. ${q.text}</div>
-                        <div class="flex-row">
-                            <div class="options">
-                                <label><input type="radio" name="vf_${q.id}" value="true"> Verdadeiro</label>
-                                <label><input type="radio" name="vf_${q.id}" value="false"> Falso</label>
-                            </div>
-                            <button class="btn-check-individual" data-qid="${q.id}" data-type="vf">Verificar</button>
-                        </div>
-                        <div class="question-feedback" id="vf-fb-${q.id}"></div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            updateStatsVF();
-            attachIndividualCheck('vf');
-            attachRadioListeners('vf');
-        }
-
-        // ------------------------------------------------------------
-        // 4. RENDERIZAÇÃO OBJETIVAS
+        // RENDERIZAÇÃO DAS QUESTÕES OBJETIVAS
         // ------------------------------------------------------------
         function renderObj() {
             const container = document.getElementById('obj-questions');
             let html = '';
-            objQuestions.forEach((q, idx) => {
-                html += `
-                    <div class="question-card" data-qid="${q.id}">
-                        <div class="question-text">${idx+1}. ${q.text}</div>
-                        <div class="flex-row">
-                            <div class="options">
-                                ${q.options.map((opt, oi) => `
-                                    <label><input type="radio" name="obj_${q.id}" value="${oi}"> ${String.fromCharCode(65+oi)}) ${opt}</label>
-                                `).join('')}
-                            </div>
-                            <button class="btn-check-individual" data-qid="${q.id}" data-type="obj">Verificar</button>
-                        </div>
-                        <div class="question-feedback" id="obj-fb-${q.id}"></div>
-                    </div>
-                `;
-            });
+
+            // Parte 1
+            html += `<div class="section-title">📘 Parte 1 – Direito Penal e Processual Penal Militar</div>`;
+            for (let i = 0; i < 10; i++) {
+                const q = objQuestions[i];
+                html += buildQuestionCard(i, q);
+            }
+
+            // Parte 2
+            html += `<div class="section-title">📘 Parte 2 – Inquérito Policial Militar (IPM) e CPPM</div>`;
+            for (let i = 10; i < 20; i++) {
+                const q = objQuestions[i];
+                html += buildQuestionCard(i, q);
+            }
+
             container.innerHTML = html;
             updateStatsObj();
-            attachIndividualCheck('obj');
-            attachRadioListeners('obj');
+            attachIndividualCheck();
+            attachRadioListeners();
+        }
+
+        function buildQuestionCard(index, q) {
+            const letter = String.fromCharCode(65 + index);
+            return `
+                <div class="question-card" data-qid="${q.id}">
+                    <div class="question-text">
+                        <span class="question-number">${index+1}.</span> ${q.text}
+                    </div>
+                    <div class="flex-row">
+                        <div class="options">
+                            ${q.options.map((opt, oi) => `
+                                <label><input type="radio" name="obj_${q.id}" value="${oi}"> ${String.fromCharCode(65+oi)}) ${opt}</label>
+                            `).join('')}
+                        </div>
+                        <button class="btn-check-individual" data-qid="${q.id}">Verificar</button>
+                    </div>
+                    <div class="question-feedback" id="obj-fb-${q.id}"></div>
+                </div>
+            `;
         }
 
         // ------------------------------------------------------------
-        // 5. VERIFICAÇÃO INDIVIDUAL com explicação
+        // VERIFICAÇÃO INDIVIDUAL
         // ------------------------------------------------------------
-        function attachIndividualCheck(type) {
-            const buttons = document.querySelectorAll(`#section-${type === 'vf' ? 'vf' : 'obj'} .btn-check-individual`);
+        function attachIndividualCheck() {
+            const buttons = document.querySelectorAll('.btn-check-individual');
             buttons.forEach(btn => {
                 btn.addEventListener('click', function() {
                     const qid = parseInt(this.dataset.qid);
-                    if (type === 'vf') {
-                        checkIndividualVF(qid);
-                    } else {
-                        checkIndividualObj(qid);
-                    }
+                    checkIndividualObj(qid);
                 });
             });
         }
 
-        function checkIndividualVF(qid) {
-            const question = vfQuestions.find(q => q.id === qid);
-            const selected = document.querySelector(`input[name="vf_${qid}"]:checked`);
-            const fb = document.getElementById(`vf-fb-${qid}`);
-            if (!selected) {
-                fb.className = 'question-feedback show wrong';
-                fb.innerHTML = '⚠️ Selecione uma opção antes de verificar.';
-                return;
-            }
-            const isCorrect = (selected.value === 'true') === question.answer;
-            fb.className = `question-feedback show ${isCorrect ? 'correct' : 'wrong'}`;
-            const status = isCorrect ? '✅ Correto!' : '❌ Incorreto.';
-            fb.innerHTML = `${status}<div class="explanation">📘 ${question.explanation}</div>`;
-            updateStatsVF();
-        }
-
         function checkIndividualObj(qid) {
             const question = objQuestions.find(q => q.id === qid);
+            if (!question) return;
             const selected = document.querySelector(`input[name="obj_${qid}"]:checked`);
             const fb = document.getElementById(`obj-fb-${qid}`);
             if (!selected) {
@@ -718,18 +632,8 @@
         }
 
         // ------------------------------------------------------------
-        // 6. ESTATÍSTICAS
+        // ESTATÍSTICAS
         // ------------------------------------------------------------
-        function updateStatsVF() {
-            const total = vfQuestions.length;
-            let answered = 0;
-            vfQuestions.forEach(q => {
-                const radios = document.querySelectorAll(`input[name="vf_${q.id}"]:checked`);
-                if (radios.length > 0) answered++;
-            });
-            document.getElementById('stats-vf').textContent = `${answered} / ${total} respondidas`;
-        }
-
         function updateStatsObj() {
             const total = objQuestions.length;
             let answered = 0;
@@ -740,53 +644,15 @@
             document.getElementById('stats-obj').textContent = `${answered} / ${total} respondidas`;
         }
 
-        function attachRadioListeners(type) {
-            const container = type === 'vf' ? 'section-vf' : 'section-obj';
-            const inputs = document.querySelectorAll(`#${container} input[type="radio"]`);
+        function attachRadioListeners() {
+            const inputs = document.querySelectorAll('#section-obj input[type="radio"]');
             inputs.forEach(inp => {
-                inp.addEventListener('change', () => {
-                    if (type === 'vf') updateStatsVF();
-                    else updateStatsObj();
-                });
+                inp.addEventListener('change', updateStatsObj);
             });
         }
 
         // ------------------------------------------------------------
-        // 7. CORREÇÃO EM MASSA V/F
-        // ------------------------------------------------------------
-        function corrigirVF() {
-            let acertos = 0;
-            let total = vfQuestions.length;
-            let todasRespondidas = true;
-
-            vfQuestions.forEach(q => {
-                const selected = document.querySelector(`input[name="vf_${q.id}"]:checked`);
-                const fb = document.getElementById(`vf-fb-${q.id}`);
-                if (!selected) {
-                    todasRespondidas = false;
-                    fb.className = 'question-feedback show wrong';
-                    fb.innerHTML = '⚠️ Não respondida.';
-                    return;
-                }
-                const isCorrect = (selected.value === 'true') === q.answer;
-                if (isCorrect) acertos++;
-                fb.className = `question-feedback show ${isCorrect ? 'correct' : 'wrong'}`;
-                const status = isCorrect ? '✅ Correto!' : '❌ Incorreto.';
-                fb.innerHTML = `${status}<div class="explanation">📘 ${q.explanation}</div>`;
-            });
-
-            const resultDiv = document.getElementById('result-vf');
-            resultDiv.style.display = 'block';
-            resultDiv.innerHTML = `
-                <h3>Resultado – V/F</h3>
-                <p><strong>${acertos}</strong> acertos de <strong>${total}</strong> questões.</p>
-                <p>${!todasRespondidas ? '⚠️ Algumas questões não foram respondidas.' : '✅ Todas as questões foram respondidas.'}</p>
-                <p style="font-size:14px; color:#555;">Percentual: ${Math.round((acertos/total)*100)}%</p>
-            `;
-        }
-
-        // ------------------------------------------------------------
-        // 8. CORREÇÃO EM MASSA OBJETIVAS
+        // CORREÇÃO EM MASSA
         // ------------------------------------------------------------
         function corrigirObj() {
             let acertos = 0;
@@ -813,26 +679,16 @@
             const resultDiv = document.getElementById('result-obj');
             resultDiv.style.display = 'block';
             resultDiv.innerHTML = `
-                <h3>Resultado – Objetivas</h3>
+                <h3>📊 Resultado – Geral</h3>
                 <p><strong>${acertos}</strong> acertos de <strong>${total}</strong> questões.</p>
                 <p>${!todasRespondidas ? '⚠️ Algumas questões não foram respondidas.' : '✅ Todas as questões foram respondidas.'}</p>
-                <p style="font-size:14px; color:#555;">Percentual: ${Math.round((acertos/total)*100)}%</p>
+                <p style="font-size:14px; color:#555;">Percentual de acerto: ${Math.round((acertos/total)*100)}%</p>
             `;
         }
 
         // ------------------------------------------------------------
-        // 9. RESET
+        // RESET
         // ------------------------------------------------------------
-        function resetVF() {
-            document.querySelectorAll('#section-vf input[type="radio"]').forEach(inp => inp.checked = false);
-            document.querySelectorAll('#section-vf .question-feedback').forEach(el => {
-                el.className = 'question-feedback';
-                el.innerHTML = '';
-            });
-            document.getElementById('result-vf').style.display = 'none';
-            updateStatsVF();
-        }
-
         function resetObj() {
             document.querySelectorAll('#section-obj input[type="radio"]').forEach(inp => inp.checked = false);
             document.querySelectorAll('#section-obj .question-feedback').forEach(el => {
@@ -844,31 +700,14 @@
         }
 
         // ------------------------------------------------------------
-        // 10. ABAS
+        // EVENTOS DOS BOTÕES
         // ------------------------------------------------------------
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const tab = this.dataset.tab;
-                document.querySelectorAll('.question-section').forEach(sec => sec.classList.remove('active'));
-                if (tab === 'vf') document.getElementById('section-vf').classList.add('active');
-                else document.getElementById('section-obj').classList.add('active');
-            });
-        });
-
-        // ------------------------------------------------------------
-        // 11. EVENTOS DOS BOTÕES EM MASSA
-        // ------------------------------------------------------------
-        document.getElementById('check-vf').addEventListener('click', corrigirVF);
-        document.getElementById('reset-vf').addEventListener('click', resetVF);
         document.getElementById('check-obj').addEventListener('click', corrigirObj);
         document.getElementById('reset-obj').addEventListener('click', resetObj);
 
         // ------------------------------------------------------------
-        // 12. INICIALIZAÇÃO
+        // INICIALIZAÇÃO
         // ------------------------------------------------------------
-        renderVF();
         renderObj();
     </script>
 </body>
