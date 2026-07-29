@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulado – Direito Penal Militar (20 questões objetivas)</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            padding: 30px 35px;
+        }
+
+        h1 {
+            font-size: 28px;
+            border-left: 6px solid #1e3c72;
+            padding-left: 20px;
+            color: #1e3c72;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 16px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin: 30px 0 16px 0;
+            padding: 8px 16px;
+            background: #eef2f7;
+            border-radius: 8px;
+            border-left: 5px solid #1e3c72;
+            color: #1e3c72;
+        }
+
+        .question-card {
+            background: #fafbfc;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 16px;
+            border: 1px solid #e9edf2;
+            transition: border 0.2s;
+        }
+
+        .question-card:hover {
+            border-color: #b0c4de;
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .question-number {
+            color: #1e3c72;
+            margin-right: 6px;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 8px;
+            margin-bottom: 8px;
+        }
+
+        .options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+
+        .options label:hover {
+            background: #f0f4fa;
+        }
+
+        .options input[type="radio"] {
+            width: 17px;
+            height: 17px;
+            accent-color: #1e3c72;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .question-feedback {
+            margin-top: 10px;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            display: none;
+            line-height: 1.5;
+        }
+
+        .question-feedback.correct {
+            display: block;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .question-feedback.wrong {
+            display: block;
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .question-feedback.show {
+            display: block;
+        }
+
+        .question-feedback .explanation {
+            margin-top: 6px;
+            font-weight: 400;
+            font-size: 13.5px;
+            color: #1e3c72;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border-left: 3px solid #1e3c72;
+        }
+
+        .btn-check-individual {
+            background: #17a2b8;
+            color: #fff;
+            border: none;
+            padding: 5px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 4px;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        .btn-check-individual:hover {
+            background: #138496;
+        }
+
+        .btn-check-individual:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #eef2f7;
+        }
+
+        .btn {
+            padding: 10px 32px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #e9ecef;
+            color: #2c3e50;
+        }
+
+        .btn-primary {
+            background: #1e3c72;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #16315a;
+            box-shadow: 0 4px 12px rgba(30, 60, 114, 0.3);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #bd2130;
+        }
+
+        .stats {
+            font-size: 15px;
+            background: #f8f9fa;
+            padding: 6px 18px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+
+        .result-box {
+            background: #e8f0fe;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-top: 20px;
+            border-left: 6px solid #1e3c72;
+        }
+
+        .result-box h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge {
+            background: #1e3c72;
+            color: #fff;
+            border-radius: 20px;
+            padding: 2px 12px;
+            font-size: 13px;
+            margin-left: 8px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 18px;
+            }
+            .options label {
+                font-size: 14px;
+            }
+            .btn-check-individual {
+                margin-top: 6px;
+            }
+            .flex-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-title {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ Simulado – Direito Penal e Processual Penal Militar</h1>
+        <div class="subtitle">
+            <strong>20 questões objetivas inéditas</strong> – extraídas de dois simulados temáticos:<br>
+            • Direito Penal e Processual Penal Militar (Guia Prático) • Inquérito Policial Militar (IPM / CPPM)
+        </div>
+
+        <!-- Seção única de Objetivas -->
+        <div id="section-obj" class="question-section active">
+            <div id="obj-questions"></div>
+            <div class="action-bar">
+                <div>
+                    <button class="btn btn-success" id="check-obj">Corrigir todas</button>
+                    <button class="btn btn-danger" id="reset-obj" style="margin-left:10px;">Limpar tudo</button>
+                </div>
+                <span class="stats" id="stats-obj">0 / 20 respondidas</span>
+            </div>
+            <div id="result-obj" class="result-box" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ------------------------------------------------------------
+        // BANCO DE QUESTÕES (20 no total)
+        // ------------------------------------------------------------
+        const objQuestions = [
+            // ========== PARTE 1: DIREITO PENAL E PROCESSUAL PENAL MILITAR ==========
+            {
+                id: 1,
+                text: 'Um Policial Militar estadual em serviço comete homicídio doloso contra um civil durante uma abordagem de rotina. Paralelamente, um militar do Exército Brasileiro, atuando no cumprimento de missão de Garantia da Lei e da Ordem (GLO), também comete homicídio doloso contra um civil. Assinale a alternativa correta quanto à competência jurisdicional para o julgamento dos dois casos:',
+                options: [
+                    'Ambos os militares serão julgados pelo Tribunal do Júri da Justiça Comum.',
+                    'O Policial Militar será julgado pela Justiça Militar Estadual, e o militar do Exército pelo Tribunal do Júri.',
+                    'O Policial Militar será julgado pelo Tribunal do Júri, e o militar do Exército pela Justiça Militar da União (JMU).',
+                    'Ambos os militares serão julgados pela Justiça Militar, dada a condição de serviço no momento do fato.'
+                ],
+                correct: 2,
+                explanation: 'Regra de Ouro da Competência: Homicídio doloso praticado por militar estadual contra civil vai ao Júri. Já para militares das Forças Armadas (JMU), se praticado em GLO, a competência é mantida na JMU.'
+            },
+            {
+                id: 2,
+                text: 'No tocante à competência das Justiças Militares Estadual (JME) e da União (JMU) para processar e julgar civis que cometem infrações penais, assinale a afirmativa correta:',
+                options: [
+                    'Nem a Justiça Militar Estadual nem a Justiça Militar da União possuem competência para julgar civis.',
+                    'A Justiça Militar Estadual julga civis quando o crime for praticado contra o patrimônio da Polícia Militar.',
+                    'A Justiça Militar da União pode julgar civis quando atentarem contra o patrimônio ou a ordem militar federal, sendo o julgamento feito monocraticamente pelo Juiz Federal da Justiça Militar.',
+                    'A Justiça Militar da União julga civis por meio do Conselho Permanente de Justiça, composto por oficiais das Forças Armadas.'
+                ],
+                correct: 2,
+                explanation: 'A JME nunca julga civis. A JMU pode julgar civis que atentem contra as Forças Armadas, sendo o julgamento feito monocraticamente pelo Juiz Federal da Justiça Militar.'
+            },
+            {
+                id: 3,
+                text: 'Um soldado da ativa furta a quantia de R$ 5,00 do armário de outro colega de farda dentro do alojamento do quartel. A defesa requereu o trancamento da ação penal militar alegando o Princípio da Insignificância (crime de bagatela). De acordo com a jurisprudência das Cortes Superiores e a doutrina militar:',
+                options: [
+                    'Aplica-se a insignificância, pois o valor financeiro irrisório afasta a tipicidade material do crime de furto.',
+                    'Inaplica-se a insignificância, pois o furto no quartel afeta a hierarquia, a disciplina e a confiança necessárias para a convivência na caserna.',
+                    'Aplica-se o benefício, devendo o fato ser convertido apenas em sanção administrativa por ter ocorrido sem violência.',
+                    'Inaplica-se a insignificância apenas se o militar tiver maus antecedentes registrados no seu assentamento.'
+                ],
+                correct: 1,
+                explanation: 'O furto entre militares no quartel destrói a confiança e a coesão da tropa (afeta a hierarquia e disciplina), não se admitindo a tese de bagatela/insignificância.'
+            },
+            {
+                id: 4,
+                text: 'Segundo o entendimento consolidado do Supremo Tribunal Federal (STF - HC 127.909/SP) sobre a posse de quantidade insignificante de drogas (ex: 0,14g de maconha) por militar no interior de Organização Militar:',
+                options: [
+                    'É cabível o princípio da insignificância, aplicando-se a Lei de Drogas (Lei nº 11.343/2006) com penas restritivas de direitos.',
+                    'A conduta é atípica na esfera penal militar, configurando meramente falta disciplinar de gravidade média.',
+                    'Inaplica-se a insignificância, pois a introdução de entorpecentes no ambiente militar avilta a instituição, vulnera o dever de vigilância e coloca a tropa em risco.',
+                    'Depende do prévio exame toxicológico no militar para atestar se ele era usuário dependente antes do trancamento.'
+                ],
+                correct: 2,
+                explanation: 'Drogas no ambiente militar vulneram a segurança e o dever de vigilância, sendo inaplicável o princípio da insignificância, mesmo em quantidades irrisórias.'
+            },
+            {
+                id: 5,
+                text: 'Conforme disposto no Art. 247 do Código de Processo Penal Militar (CPPM), a Nota de Culpa é a garantia formal dada ao militar preso em flagrante. Sobre as suas regras, assinale a opção correta:',
+                options: [
+                    'Deve ser entregue ao preso no prazo improrrogável de até 24 horas após a efetivação da prisão.',
+                    'Sua entrega pode ser diferida por até 5 dias mediante autorização fundamentada do Promotor de Justiça Militar.',
+                    'Não requer obrigatoriamente a assinatura ou menção ao nome das testemunhas e do condutor.',
+                    'A inobservância do prazo de emissão da Nota de Culpa constitui mera irregularidade administrativa, não afetando a legalidade da prisão.'
+                ],
+                correct: 0,
+                explanation: 'Art. 247, CPPM: A Nota de Culpa deve ser entregue em até 24 horas da prisão em flagrante. O descumprimento gera ilegalidade da prisão e relaxamento judicial.'
+            },
+            {
+                id: 6,
+                text: 'Um militar da ativa deveria se apresentar na sua unidade no dia 10 de maio, às 08h00, mas deixou de fazê-lo injustificadamente. Para fins de contagem do prazo de graça (8 dias) e consumação do crime de deserção comum (Art. 187 do CPM), a "Regra da Meia-Noite" (Art. 451 do CPPM) estabelece que:',
+                options: [
+                    'A contagem dos 8 dias inicia-se imediatamente às 08h01 do dia 10 de maio.',
+                    'O prazo de graça começa a fluir à zero hora do dia 11 de maio (dia seguinte), consumando-se o crime à zero hora do dia 19 de maio.',
+                    'O crime de deserção se consuma exatamente às 08h00 do 8º dia subsequente à falta.',
+                    'Durante os primeiros 8 dias, o militar já responde pelo crime de deserção tentada.'
+                ],
+                correct: 1,
+                explanation: 'Regra da Meia-Noite (Art. 451, CPPM): O prazo de graça (8 dias) não conta no dia da falta; inicia na 00:00h do dia seguinte (dia 11) e o crime se consuma na 00:00h do 9º dia (dia 19).'
+            },
+            {
+                id: 7,
+                text: 'Acerca das modalidades específicas do crime de deserção previstas no Código Penal Militar, analise as afirmativas: I. A Deserção Especial (Art. 190) ocorre quando o militar deixa de se apresentar na partida de navio ou aeronave de cuja tripulação faz parte, não exigindo o prazo de graça de 8 dias. II. O Favorecimento a Desertor (Art. 193) prevê isenção de pena se o favorecedor for ascendente, descendente, cônjuge ou irmão do desertor. III. A apresentação voluntária do desertor em até 8 dias após a consumação do crime extingue integralmente a punibilidade. Está(ão) correta(s):',
+                options: [
+                    'Apenas a afirmativa I.',
+                    'Apenas as afirmativas I e II.',
+                    'Apenas as afirmativas II e III.',
+                    'Todas as afirmativas (I, II e III).'
+                ],
+                correct: 1,
+                explanation: 'Arts. 190, 193 e 189 do CPM: As afirmativas I e II estão corretas. A III está errada, pois o retorno em até 8 dias reduz a pena pela metade (atenuante), não extinguindo a punibilidade.'
+            },
+            {
+                id: 8,
+                text: 'Com as alterações promovidas pela Lei nº 13.491/2017 no Código Penal Militar, passou-se a admitir os chamados "crimes militares por extensão". Assinale a alternativa que define corretamente esse conceito:',
+                options: [
+                    'São crimes previstos exclusivamente no Código Penal Militar que passam a ser julgados pelos juízes da Justiça Comum.',
+                    'São infrações penais previstas unicamente na legislação penal comum/extravagante que, quando praticadas por militar nas hipóteses do Art. 9º do CPM, transmudam-se em crimes militares.',
+                    'São condutas atípicas na lei penal comum, mas que são punidas como crime na Justiça Militar por ferirem o Regulamento Disciplinar.',
+                    'São crimes militares praticados obrigatoriamente em coautoria entre um militar e um civil.'
+                ],
+                correct: 1,
+                explanation: 'Lei nº 13.491/2017: Criou os crimes militares por extensão (previstos apenas na legislação penal comum extravagante, mas julgados pela Justiça Militar quando no Art. 9º do CPM).'
+            },
+            {
+                id: 9,
+                text: 'Um policial militar, estando em serviço e valendo-se do cargo, submete um preso sob sua custódia a intenso sofrimento físico como forma de aplicar-lhe castigo pessoal (Crime de Tortura - Lei nº 9.455/1997). Considerando a disciplina da Lei nº 13.491/2017, este fato constitui:',
+                options: [
+                    'Crime comum de tortura, de competência da Justiça Comum Estadual.',
+                    'Crime militar por extensão, cuja competência para processar e julgar pertence à Justiça Militar.',
+                    'Infração exclusivamente disciplinar, inaplicável a esfera penal à atividade militar.',
+                    'Crime de abuso de autoridade absorvido pelo Código Penal Comum.'
+                ],
+                correct: 1,
+                explanation: 'Lei de Tortura + Lei 13.491/2017: Por ter sido cometido por militar em serviço, o crime de tortura (Lei 9.455/97) torna-se crime militar por extensão de competência da Justiça Militar.'
+            },
+            {
+                id: 10,
+                text: 'Sobre a Ação Penal Militar e a atuação do Ministério Público Militar (MPM) diante das conclusões do Inquérito Policial Militar (IPM), assinale a afirmativa correta:',
+                options: [
+                    'A Ação Penal Militar pode ser privada subsidiária da pública caso o MPM não ofereça denúncia no prazo de 30 dias.',
+                    'Vigora no Processo Penal Militar o princípio da obrigatoriedade, devendo o MPM denunciar o indiciado quando houver prova do fato e indícios suficientes de autoria.',
+                    'O Comandante da Organização Militar pode determinar o arquivamento do IPM caso entenda que o fato não afetou a disciplina da unidade.',
+                    'O prazo para o oferecimento da denúncia pelo MPM é de 10 dias para indiciado preso e 30 dias para indiciado solto.'
+                ],
+                correct: 1,
+                explanation: 'Arts. 30 e 79 do CPPM: A ação penal militar é pública incondicionada sob o princípio da obrigatoriedade. Os prazos para denúncia são de 5 dias (preso) e 15 dias (solto). Comandante não arquiva IPM.'
+            },
+
+            // ========== PARTE 2: INQUÉRITO POLICIAL MILITAR (IPM) ==========
+            {
+                id: 11,
+                text: 'Em tempo de paz, instaurado Inquérito Policial Militar (IPM) para apurar a autoria de crime militar praticado por praça que se encontra preso preventivamente, o encarregado do IPM terá o prazo improrrogável de:',
+                options: [
+                    '10 dias, contados da instauração do IPM.',
+                    '20 dias, contados do dia em que se executar a ordem de prisão.',
+                    '30 dias, prorrogáveis por mais 15 dias pelo juiz auditor.',
+                    '40 dias, prorrogáveis por mais 20 dias a pedido fundamentado.'
+                ],
+                correct: 1,
+                explanation: 'Art. 20, caput, CPPM: O IPM deve ser concluído em 20 dias se o indiciado estiver preso, contados do dia em que se executar a ordem de prisão (prazo improrrogável em tempo de paz).'
+            },
+            {
+                id: 12,
+                text: 'Quando o indiciado estiver em liberdade, o prazo para a conclusão do Inquérito Policial Militar (IPM) é de 40 dias. Caso a causa seja de difícil elucidação, este prazo poderá ser prorrogado por mais:',
+                options: [
+                    '10 dias, por decisão sumária do comandante do batalhão.',
+                    '15 dias, mediante autorização do Ministério Público Militar.',
+                    '20 dias, concedidos pela autoridade judiciária competente.',
+                    '40 dias, bastando a prorrogação no boletim interno da unidade.'
+                ],
+                correct: 2,
+                explanation: 'Art. 20, §1º, CPPM: Se o indiciado estiver solto, o prazo é de 40 dias, podendo ser prorrogado por mais 20 dias pela autoridade judiciária competente.'
+            },
+            {
+                id: 13,
+                text: 'No caso de prisão em flagrante delito de militar, a comunicação imediata à autoridade judiciária competente e a entrega da respectiva Nota de Culpa assinada pela autoridade devem ocorrer no prazo máximo de:',
+                options: [
+                    '12 horas.',
+                    '24 horas.',
+                    '48 horas.',
+                    '72 horas.'
+                ],
+                correct: 2,
+                explanation: 'Arts. 247 e 250, CPPM: A comunicação da prisão em flagrante ao juiz e a entrega da Nota de Culpa ao preso devem ser efetuadas em até 48 horas.'
+            },
+            {
+                id: 14,
+                text: 'Após receber os autos do Inquérito Policial Militar referentes a um indiciado que se encontra preso, o Ministério Público Militar (MPM) terá o prazo legal para oferecer a denúncia de:',
+                options: [
+                    '5 dias.',
+                    '8 dias.',
+                    '10 dias.',
+                    '15 dias.'
+                ],
+                correct: 0,
+                explanation: 'Art. 79, caput, CPPM: O prazo para o MPM oferecer a denúncia é de 5 dias estando o réu preso.'
+            },
+            {
+                id: 15,
+                text: 'Nos casos em que o indiciado responda às investigações em liberdade, o Promotor de Justiça Militar disporá do prazo de:',
+                options: [
+                    '5 dias para oferecer a denúncia ou pedir arquivamento.',
+                    '10 dias para expedir a notificação prévia de acusação.',
+                    '15 dias para o oferecimento da denúncia ao Juízo Militar.',
+                    '30 dias improrrogáveis para a propositura da ação penal militar.'
+                ],
+                correct: 2,
+                explanation: 'Art. 79, caput, CPPM: Estando o réu solto, o prazo legal para o oferecimento da denúncia pelo órgão acusador é de 15 dias.'
+            },
+            {
+                id: 16,
+                text: 'Encerrada a fase de instrução criminal no processo penal militar (oitiva de testemunhas e interrogatório), o Ministério Público e a Defesa apresentarão suas alegações finais escritas (Art. 428 do CPPM) no prazo sucessivo de:',
+                options: [
+                    '3 dias para cada parte.',
+                    '5 dias para o MPM e 5 dias para a Defesa.',
+                    '8 dias para o MPM e 8 dias para a Defesa.',
+                    '15 dias comuns para ambas as partes.'
+                ],
+                correct: 2,
+                explanation: 'Art. 428, CPPM: Encerrada a instrução, o prazo para alegações escritas é de 8 dias para o Ministério Público e de 8 dias para a Defesa (sucessivos).'
+            },
+            {
+                id: 17,
+                text: 'Sobre as características e a natureza do Inquérito Policial Militar (IPM), assinale a afirmativa correta:',
+                options: [
+                    'É uma fase judicial indispensável da Ação Penal Militar.',
+                    'Trata-se de procedimento administrativo-informativo com a finalidade de apurar a autoria e a materialidade de infrações penais militares.',
+                    'Suas nulidades anulam automaticamente o processo judicial subsequente.',
+                    'Possui caráter estritamente acusatório, exigindo o contraditório pleno antes de seu encerramento.'
+                ],
+                correct: 1,
+                explanation: 'Arts. 9º ao 12, CPPM: O IPM é um procedimento administrativo pré-processual, informativo e dispensável; vício no IPM não anula a ação penal.'
+            },
+            {
+                id: 18,
+                text: 'No âmbito do Processo Penal Militar, o encarregado do IPM deve possuir posto superior ao do indiciado. Caso o indiciado seja um Oficial Superior (ex: Tenente-Coronel), a delegação para a abertura e condução do IPM deverá recair sobre:',
+                options: [
+                    'Um Capitão mais antigo da unidade militar.',
+                    'Um Oficial de posto superior ou mais antigo que o indiciado.',
+                    'Exclusivamente o Juiz de Direito do Juízo Militar.',
+                    'O Promotor de Justiça Militar com atribuição na Auditoria Militar.'
+                ],
+                correct: 1,
+                explanation: 'Art. 7º, §1º, CPPM: A designação do encarregado deverá recair em oficial de posto superior ao do indiciado ou mais antigo, caso haja igualdade de posto.'
+            },
+            {
+                id: 19,
+                text: 'Após a conclusão das diligências no IPM, o Encarregado elaborará um relatório minucioso. Sobre a competência para o arquivamento do Inquérito Policial Militar, é correto afirmar que:',
+                options: [
+                    'O Encarregado do IPM pode mandar arquivar os autos se constatar inocência inequívoca.',
+                    'O Comandante da Unidade tem o poder discricionário de arquivar o IPM.',
+                    'O arquivamento só pode ser determinado pela Autoridade Judiciária competente, a requerimento do Ministério Público Militar.',
+                    'O encarregado deve propor o arquivamento diretamente à Corregedoria.'
+                ],
+                correct: 2,
+                explanation: 'Arts. 24 e 25, CPPM: Princípio da Indisponibilidade do Inquérito. A autoridade policial militar não pode arquivar IPM; o arquivamento é ato exclusivo do Juiz a requerimento do MPM.'
+            },
+            {
+                id: 20,
+                text: 'Nos termos do Art. 16 do CPPM, no que diz respeito à contagem dos prazos referentes à constrição da liberdade de locomoção e aos atos processuais/investigativos:',
+                options: [
+                    'Exclui-se o dia do início e inclui-se o dia do vencimento em todas as hipóteses.',
+                    'O prazo do IPM de réu preso conta-se do dia em que se executar a ordem de prisão, incluindo-se o dia do início.',
+                    'Os prazos são contados apenas em dias úteis durante o período de instrução.',
+                    'A contagem dos prazos é suspensa nos finais de semana e feriados em qualquer circunstância.'
+                ],
+                correct: 1,
+                explanation: 'Art. 16, CPPM / Regras Próprias do Direito Penal Militar: No prazo do IPM de réu preso, inclui-se o dia do início por afetar a liberdade individual do indiciado.'
+            }
+        ];
+
+        // ------------------------------------------------------------
+        // RENDERIZAÇÃO DAS QUESTÕES OBJETIVAS
+        // ------------------------------------------------------------
+        function renderObj() {
+            const container = document.getElementById('obj-questions');
+            let html = '';
+
+            // Parte 1
+            html += `<div class="section-title">📘 Parte 1 – Direito Penal e Processual Penal Militar</div>`;
+            for (let i = 0; i < 10; i++) {
+                const q = objQuestions[i];
+                html += buildQuestionCard(i, q);
+            }
+
+            // Parte 2
+            html += `<div class="section-title">📘 Parte 2 – Inquérito Policial Militar (IPM) e CPPM</div>`;
+            for (let i = 10; i < 20; i++) {
+                const q = objQuestions[i];
+                html += buildQuestionCard(i, q);
+            }
+
+            container.innerHTML = html;
+            updateStatsObj();
+            attachIndividualCheck();
+            attachRadioListeners();
+        }
+
+        function buildQuestionCard(index, q) {
+            const letter = String.fromCharCode(65 + index);
+            return `
+                <div class="question-card" data-qid="${q.id}">
+                    <div class="question-text">
+                        <span class="question-number">${index+1}.</span> ${q.text}
+                    </div>
+                    <div class="flex-row">
+                        <div class="options">
+                            ${q.options.map((opt, oi) => `
+                                <label><input type="radio" name="obj_${q.id}" value="${oi}"> ${String.fromCharCode(65+oi)}) ${opt}</label>
+                            `).join('')}
+                        </div>
+                        <button class="btn-check-individual" data-qid="${q.id}">Verificar</button>
+                    </div>
+                    <div class="question-feedback" id="obj-fb-${q.id}"></div>
+                </div>
+            `;
+        }
+
+        // ------------------------------------------------------------
+        // VERIFICAÇÃO INDIVIDUAL
+        // ------------------------------------------------------------
+        function attachIndividualCheck() {
+            const buttons = document.querySelectorAll('.btn-check-individual');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const qid = parseInt(this.dataset.qid);
+                    checkIndividualObj(qid);
+                });
+            });
+        }
+
+        function checkIndividualObj(qid) {
+            const question = objQuestions.find(q => q.id === qid);
+            if (!question) return;
+            const selected = document.querySelector(`input[name="obj_${qid}"]:checked`);
+            const fb = document.getElementById(`obj-fb-${qid}`);
+            if (!selected) {
+                fb.className = 'question-feedback show wrong';
+                fb.innerHTML = '⚠️ Selecione uma opção antes de verificar.';
+                return;
+            }
+            const isCorrect = parseInt(selected.value) === question.correct;
+            fb.className = `question-feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+            const correctLetter = String.fromCharCode(65 + question.correct);
+            const status = isCorrect ? '✅ Correto!' : `❌ Incorreto. Resposta correta: ${correctLetter}) ${question.options[question.correct]}`;
+            fb.innerHTML = `${status}<div class="explanation">📘 ${question.explanation}</div>`;
+            updateStatsObj();
+        }
+
+        // ------------------------------------------------------------
+        // ESTATÍSTICAS
+        // ------------------------------------------------------------
+        function updateStatsObj() {
+            const total = objQuestions.length;
+            let answered = 0;
+            objQuestions.forEach(q => {
+                const radios = document.querySelectorAll(`input[name="obj_${q.id}"]:checked`);
+                if (radios.length > 0) answered++;
+            });
+            document.getElementById('stats-obj').textContent = `${answered} / ${total} respondidas`;
+        }
+
+        function attachRadioListeners() {
+            const inputs = document.querySelectorAll('#section-obj input[type="radio"]');
+            inputs.forEach(inp => {
+                inp.addEventListener('change', updateStatsObj);
+            });
+        }
+
+        // ------------------------------------------------------------
+        // CORREÇÃO EM MASSA
+        // ------------------------------------------------------------
+        function corrigirObj() {
+            let acertos = 0;
+            let total = objQuestions.length;
+            let todasRespondidas = true;
+
+            objQuestions.forEach(q => {
+                const selected = document.querySelector(`input[name="obj_${q.id}"]:checked`);
+                const fb = document.getElementById(`obj-fb-${q.id}`);
+                if (!selected) {
+                    todasRespondidas = false;
+                    fb.className = 'question-feedback show wrong';
+                    fb.innerHTML = '⚠️ Não respondida.';
+                    return;
+                }
+                const isCorrect = parseInt(selected.value) === q.correct;
+                if (isCorrect) acertos++;
+                fb.className = `question-feedback show ${isCorrect ? 'correct' : 'wrong'}`;
+                const correctLetter = String.fromCharCode(65 + q.correct);
+                const status = isCorrect ? '✅ Correto!' : `❌ Incorreto. Resposta correta: ${correctLetter}) ${q.options[q.correct]}`;
+                fb.innerHTML = `${status}<div class="explanation">📘 ${q.explanation}</div>`;
+            });
+
+            const resultDiv = document.getElementById('result-obj');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h3>📊 Resultado – Geral</h3>
+                <p><strong>${acertos}</strong> acertos de <strong>${total}</strong> questões.</p>
+                <p>${!todasRespondidas ? '⚠️ Algumas questões não foram respondidas.' : '✅ Todas as questões foram respondidas.'}</p>
+                <p style="font-size:14px; color:#555;">Percentual de acerto: ${Math.round((acertos/total)*100)}%</p>
+            `;
+        }
+
+        // ------------------------------------------------------------
+        // RESET
+        // ------------------------------------------------------------
+        function resetObj() {
+            document.querySelectorAll('#section-obj input[type="radio"]').forEach(inp => inp.checked = false);
+            document.querySelectorAll('#section-obj .question-feedback').forEach(el => {
+                el.className = 'question-feedback';
+                el.innerHTML = '';
+            });
+            document.getElementById('result-obj').style.display = 'none';
+            updateStatsObj();
+        }
+
+        // ------------------------------------------------------------
+        // EVENTOS DOS BOTÕES
+        // ------------------------------------------------------------
+        document.getElementById('check-obj').addEventListener('click', corrigirObj);
+        document.getElementById('reset-obj').addEventListener('click', resetObj);
+
+        // ------------------------------------------------------------
+        // INICIALIZAÇÃO
+        // ------------------------------------------------------------
+        renderObj();
+    </script>
+</body>
+</html>
